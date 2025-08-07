@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hyprland Interactive Cheat Sheet</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .key-tag {
+            background-color: #e5e7eb; /* gray-200 */
+            border-bottom: 2px solid #d1d5db; /* gray-300 */
+            color: #1f2937; /* gray-800 */
+            padding: 2px 8px;
+            border-radius: 6px;
+            font-family: monospace;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-stone-100 text-stone-800">
+    <!-- Chosen Palette: Calm Harmony (Stone and Teal) -->
+    <!-- Application Structure Plan: A tab-based navigation system is used, with each tab corresponding to a major category from the user's config file (Window Management, Launcher, etc.). This structure is intuitive as it mirrors the user's own organization. A prominent search bar provides a powerful, direct way to filter all keybindings, which is the primary goal of a cheat sheet. This combination of browsing by category and direct searching offers the most efficient user flow for both learning and quick reference. -->
+    <!-- Visualization & Content Choices: Report Info (Keybindings) -> Goal (Quick Reference & Search) -> Viz/Presentation (Styled HTML Tables) -> Interaction (Live search filtering and tabbed navigation) -> Justification (Tables are optimal for this structured, two-column data. Live filtering is the most critical interactive feature for a cheat sheet, turning it from a static page into a dynamic tool.) -> Library/Method (Vanilla JS for interactions, Tailwind for styling). -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+    <div class="container mx-auto p-4 sm:p-6 md:p-8 max-w-6xl">
+        <header class="text-center mb-8">
+            <h1 class="text-4xl font-bold text-stone-900">Hyprland Keybinding Cheat Sheet</h1>
+            <p class="text-stone-600 mt-2">Your interactive guide to mastering your keybindings. Start typing to search.</p>
+        </header>
+
+        <div class="sticky top-0 z-10 bg-stone-100/80 backdrop-blur-sm py-4 mb-6">
+            <input type="text" id="searchInput" placeholder="Search for any action or key..." class="w-full p-3 border-2 border-stone-300 rounded-lg shadow-sm focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition">
+        </div>
+
+        <div class="bg-white rounded-lg shadow-lg p-2 sm:p-4">
+            <nav id="tab-nav" class="flex flex-wrap border-b border-stone-200">
+                <button data-tab="wm" class="tab-button active p-3 sm:p-4 text-sm sm:text-base font-semibold border-b-2 border-teal-500 text-teal-600">Window Management</button>
+                <button data-tab="launcher" class="tab-button p-3 sm:p-4 text-sm sm:text-base font-semibold border-b-2 border-transparent text-stone-500 hover:border-stone-300 hover:text-stone-700 transition-colors">🚀 Launcher</button>
+                <button data-tab="hardware" class="tab-button p-3 sm:p-4 text-sm sm:text-base font-semibold border-b-2 border-transparent text-stone-500 hover:border-stone-300 hover:text-stone-700 transition-colors">⚙️ Hardware Controls</button>
+                <button data-tab="utils" class="tab-button p-3 sm:p-4 text-sm sm:text-base font-semibold border-b-2 border-transparent text-stone-500 hover:border-stone-300 hover:text-stone-700 transition-colors">🛠️ Utilities</button>
+                <button data-tab="theming" class="tab-button p-3 sm:p-4 text-sm sm:text-base font-semibold border-b-2 border-transparent text-stone-500 hover:border-stone-300 hover:text-stone-700 transition-colors">🎨 Theming</button>
+                <button data-tab="workspaces" class="tab-button p-3 sm:p-4 text-sm sm:text-base font-semibold border-b-2 border-transparent text-stone-500 hover:border-stone-300 hover:text-stone-700 transition-colors">🖥️ Workspaces</button>
+            </nav>
+
+            <div class="p-2 sm:p-6">
+                <!-- Window Management -->
+                <div id="wm" class="tab-content active">
+                    <p class="mb-6 text-stone-600">This section covers all shortcuts related to creating, closing, moving, resizing, and focusing windows. These are the fundamental commands for controlling what you see on screen.</p>
+                    <table class="w-full keybinding-table">
+                        <tbody class="divide-y divide-stone-200">
+                            <tr><td colspan="2" class="pt-4 pb-2 text-lg font-bold text-teal-700">General</td></tr>
+                            <tr><td class="py-3 px-2 text-stone-600">Close focused window (safe for Steam)</td><td class="py-3 px-2 text-right"><span class="key-tag">SUPER</span> + <span class="key-tag">Q</span> or <span class="key-tag">Alt</span> + <span class="key-tag">F4</span></td></tr>
+                            <tr><td class="py-3 px-2 text-stone-600">Toggle floating</td><td class="py-3 px-2 text-right"><span class="key-tag">SUPER</span> + <span class="key-tag">W</span></td></tr>
+                            <tr><td class="py-3 px-2 text-stone-600">Toggle group</td><td class="py-3 px-2 text-right"><span class="key-tag">SUPER</span> + <span class="key-tag">G</span></td></tr>
+                            <tr><td class="py-3 px-2 text-stone-600">Toggle fullscreen</td><td class="py-3 px-2 text-right"><span class="key-tag">Shift</span> + <span class="key-tag">F11</span></td></tr>
+                            <tr><td class="py-3 px-2 text-stone-600">Exit Hyprland session</td><td class="py-3 px-2 text-right"><span class="key-tag">SUPER</span> + <span class="key-tag">Delete</span></td></tr>
+                            <tr><td class="py-3 px-2 text-stone-600">Lock screen</td><td class="py-3 px-2 text-right"><span class="key-tag">SUPER</span> + <span class="key-tag">L</span></td></tr>
+                            <tr><td class="py-3 px-2 text-stone-600">Pin focused window</td><td class="py-3 px-2 text-right"><span class="key-tag">SUPER</span> + <span class="key-tag">Shift</span> + <span class="key-tag">F</span></td></tr>
+                            <tr><td class="py-3 px-2 text-stone-600">Logout menu</td><td class="py-3 px-2 text-right"><span class="key-tag">Ctrl</span> + <span class="key-tag">Alt</span> + <span class="key-tag">Delete</span></td></tr>
+                            <tr><td class="py-3 px-2 text-stone-600">Toggle Waybar & reload</td><td class="py-3 px-2 text-right"><span class="key-tag">R_Alt</span> + <span class="key-tag">R_Ctrl</span></td></tr>
+                            <tr><td class="py-3 px-2 text-stone-600">Toggle split direction</td><td class="py-3 px-2 text-right"><span class="key-tag">SUPER</span> + <span class="key-tag">J</span></td></tr>
+
+                            <tr><td colspan="2" class="pt-8 pb-2 text-lg font-bold text-teal-700">Group Navigation</td></tr>
+                            <tr><td class="py-3 px-2 text-stone-600">Change active group backwards</td><td class="py-3 px-2 text-right"><span class="key-tag">SUPER</span> + <span class="key-tag">Ctrl</span> + <span class="key-tag">H</span></td></tr>
+                            <tr><td class="py-3 px-2 text-stone-600">Change active group forwards</td><td class="py-3 px-2 text-right"><span class="key-tag">SUPER</span> + <span class="key-tag">Ctrl</span> + <span class="key-tag">L</span></td></tr>
+
+                            <tr><td colspan="2" class="pt-8 pb-2 text-lg font-bold text-teal-700">Focus Control</td></tr>
+                            <tr><td class="py-3 px-2 text-stone-600">Focus left/right/up/down</td><td class="py-3 px-2 text-right"><span class="key-tag">SUPER</span> + <span class="key-tag">←</span>/<span class="key-tag">→</span>/<span class="key-tag">↑</span>/<span class="key-tag">↓</span></td></tr>
+                            <tr><td class="py-3 px-2 text-stone-600">Cycle focus</td><td class="py-3 px-2 text-right"><span class="key-tag">Alt</span> + <span class="key-tag">Tab</span></td></tr>
+
+                            <tr><td colspan="2" class="pt-8 pb-2 text-lg font-bold text-teal-700">Resize & Move</td></tr>
+                            <tr><td class="py-3 px-2 text-stone-600">Resize window</td><td class="py-3 px-2 text-right"><span class="key-tag">SUPER</span> + <span class="key-tag">Shift</span> + <span class="key-tag">Arrows</span></td></tr>
+                            <tr><td class="py-3 px-2 text-stone-600">Move active window</td><td class="py-3 px-2 text-right"><span class="key-tag">SUPER</span> + <span class="key-tag">Shift</span> + <span class="key-tag">Ctrl</span> + <span class="key-tag">Arrows</span></td></tr>
+                            <tr><td class="py-3 px-2 text-stone-600">Move window (mouse)</td><td class="py-3 px-2 text-right"><span class="key-tag">SUPER</span> + <span class="key-tag">LMB Drag</span></td></tr>
+                            <tr><td class="py-3 px-2 text-stone-600">Resize window (mouse)</td><td class="py-3 px-2 text-right"><span class="key-tag">SUPER</span> + <span class="key-tag">RMB Drag</span></td></tr>
+                            <tr><td class="py-3 px-2 text-stone-600">Move window (keyboard hold)</td><td class="py-3 px-2 text-right"><span class="key-tag">SUPER</span> + <span class="key-tag">Z</span></td></tr>
+                            <tr><td class="py-3 px-2 text-stone-600">Resize window (keyboard hold)</td><td class="py-3 px-2 text-right"><span class="key-tag">SUPER</span> + <span class="key-tag">X</span></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Launcher -->
+                <div id="launcher" class="tab-content">
+                    <p class="mb-6 text-stone-600">Shortcuts for launching your favorite applications and utility menus. This is your command center for opening everything you need, from terminals to system monitors.</p>
+                     <table class="w-full keybinding-table">
+                        <tbody class="divide-y divide-stone-200">
+                            <tr><td colspan="2" class="pt-4 pb-2 text-lg font-bold text-teal-700">Applications</td></tr>
+                            <tr><td class="py-3 px-2 text-stone-600">Terminal</td><td class="py-3 px-2 text-right"><span class="key-tag">SUPER</span> + <span class="key-tag">T</span></td></tr>
+                            <tr><td class="py-3 px-2 text-stone-600">Dropdown Terminal</td><td class="py-3 px-2 text-right"><span class="key-tag">SUPER</span> + <span class="key-tag">Alt</span> + <span class="key-tag">T</span></td></tr>
+                            <tr><td class="py-3 px-2 text-stone-600">File Explorer</td><td class="py-3 px-2 text-right"><span class="key-tag">SUPER</span> + <span class="key-tag">E</span></td></tr>
+                            <tr><td class="py-3 px-2 text-stone-600">Text Editor</td><td class="py-3 px-2 text-right"><span class="key-tag">SUPER</span> + <span class="key-tag">C</span></td></tr>
+                            <tr><td class="py-3 px-2 text-stone-600">Web Browser</td><td class="py-3 px-2 text-right"><span class="key-tag">SUPER</span> + <span class="key-tag">B</span></td></tr>
+                            <tr><td class="py-3 px-2 text-stone-600">System Monitor</td><td class="py-3 px-2 text-right"><span class="key-tag">Ctrl</span> + <span class="key-tag">Shift</span> + <span class="key-tag">Escape</span></td></tr>
+
+                            <tr><td colspan="2" class="pt-8 pb-2 text-lg font-bold text-teal-700">Rofi Menus</td></tr>
+                            <tr><td class="py-3 px-2 text-stone-600">Application finder</td><td class="py-3 px-2 text-right"><span class="key-tag">SUPER</span> + <span class="key-tag">A</span></td></tr>
+                            <tr><td class="py-3 px-2 text-stone-600">Window switcher</td><td class="py-3 px-2 text-right"><span class="key-tag">SUPER</span> + <span class="key-tag">TAB</span></td></tr>
+                            <tr><td class="py-3 px-2 text-stone-600">File finder</td><td class="py-3 px-2 text-right"><span class="key-tag">SUPER</span> + <span class="key-tag">Shift</span> + <span class="key-tag">E</span></td></tr>
+                            <tr><td class="py-3 px-2 text-stone-600">Keybindings hint</td><td class="py-3 px-2 text-right"><span class="key-tag">SUPER</span> + <span class="key-tag">/</span></td></tr>
+                            <tr><td class="py-3 px-2 text-stone-600">Emoji picker</td><td class="py-3 px-2 text-right"><span class="key-tag">SUPER</span> + <span class="key-tag">,</span></td></tr>
+                            <tr><td class="py-3 px-2 text-stone-600">Glyph picker</td><td class="py-3 px-2 text-right"><span class="key-tag">SUPER</span> + <span class="key-tag">.</span></td></tr>
+                            <tr><td class="py-3 px-2 text-stone-600">Clipboard history</td><td class="py-3 px-2 text-right"><span class="key-tag">SUPER</span> + <span class="key-tag">V</span></td></tr>
+                            <tr><td class="py-3 px-2 text-stone-600">Clipboard manager</td><td class="py-3 px-2 text-right"><span class="key-tag">SUPER</span> + <span class="key-tag">Shift</span> + <span class="key-tag">V</span></td></tr>
+                            <tr><td class="py-3 px-2 text-stone-600">Select Rofi launcher</td><td class="py-3 px-2 text-right"><span class="key-tag">SUPER</span> + <span class="key-tag">Shift</span> + <span class="key-tag">A</span></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- Hardware -->
+                <div id="hardware" class="tab-content">
+                    <p class="mb-6 text-stone-600">Control your system's hardware features like audio volume, media playback, and screen brightness using your keyboard's dedicated media keys.</p>
+                     <table class="w-full keybinding-table">
+                        <tbody class="divide-y divide-stone-200">
+                            <tr><td colspan="2" class="pt-4 pb-2 text-lg font-bold text-teal-700">Audio</td></tr>
+                            <tr><td class="py-3 px-2 text-stone-600">Toggle mute output</td><td class="py-3 px-2 text-right"><span class="key-tag">F10</span> or <span class="key-tag">XF86AudioMute</span></td></tr>
+                            <tr><td class="py-3 px-2 text-stone-600">Decrease volume</td><td class="py-3 px-2 text-right"><span class="key-tag">F11</span> or <span class="key-tag">XF86AudioLowerVolume</span></td></tr>
+                            <tr><td class="py-3 px-2 text-stone-600">Increase volume</td><td class="py-3 px-2 text-right"><span class="key-tag">F12</span> or <span class="key-tag">XF86AudioRaiseVolume</span></td></tr>
+                            <tr><td class="py-3 px-2 text-stone-600">Toggle microphone mute</td><td class="py-3 px-2 text-right"><span class="key-tag">XF86AudioMicMute</span></td></tr>
+                            
+                            <tr><td colspan="2" class="pt-8 pb-2 text-lg font-bold text-teal-700">Media</td></tr>
+                            <tr><td class="py-3 px-2 text-stone-600">Play/Pause media</td><td class="py-3 px-2 text-right"><span class="key-tag">XF86AudioPlay</span> / <span class="key-tag">Pause</span></td></tr>
+                            <tr><td class="py-3 px-2 text-stone-600">Next media</td><td class="py-3 px-2 text-right"><span class="key-tag">XF86AudioNext</span></td></tr>
+                            <tr><td class="py-3 px-2 text-stone-600">Previous media</td><td class="py-3 px-2 text-right"><span class="key-tag">XF86AudioPrev</span></td></tr>
+
+                            <tr><td colspan="2" class="pt-8 pb-2 text-lg font-bold text-teal-700">Brightness</td></tr>
+                            <tr><td class="py-3 px-2 text-stone-600">Increase brightness</td><td class="py-3 px-2 text-right"><span class="key-tag">XF86MonBrightnessUp</span></td></tr>
+                            <tr><td class="py-3 px-2 text-stone-600">Decrease brightness</td><td class="py-3 px-2 text-right"><span class="key-tag">XF86MonBrightnessDown</span></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Utilities -->
+                <div id="utils" class="tab-content">
+                    <p class="mb-6 text-stone-600">A collection of helpful tools and scripts, including screen capture functions, a color picker, and gaming-related toggles.</p>
+                     <table class="w-full keybinding-table">
+                        <tbody class="divide-y divide-stone-200">
+                             <tr><td colspan="2" class="pt-4 pb-2 text-lg font-bold text-teal-700">General</td></tr>
+                            <tr><td class="py-3 px-2 text-stone-600">Toggle keyboard layout</td><td class="py-3 px-2 text-right"><span class="key-tag">SUPER</span> + <span class="key-tag">K</span></td></tr>
+                            <tr><td class="py-3 px-2 text-stone-600">Toggle Game Mode</td><td class="py-3 px-2 text-right"><span class="key-tag">SUPER</span> + <span class="key-tag">Alt</span> + <span class="key-tag">G</span></td></tr>
+                            <tr><td class="py-3 px-2 text-stone-600">Open game launcher</td><td class="py-3 px-2 text-right"><span class="key-tag">SUPER</span> + <span class="key-tag">Shift</span> + <span class="key-tag">G</span></td></tr>
+
+                            <tr><td colspan="2" class="pt-8 pb-2 text-lg font-bold text-teal-700">Screen Capture</td></tr>
+                            <tr><td class="py-3 px-2 text-stone-600">Color picker</td><td class="py-3 px-2 text-right"><span class="key-tag">SUPER</span> + <span class="key-tag">Shift</span> + <span class="key-tag">P</span></td></tr>
+                            <tr><td class="py-3 px-2 text-stone-600">Snip screen</td><td class="py-3 px-2 text-right"><span class="key-tag">SUPER</span> + <span class="key-tag">P</span></td></tr>
+                            <tr><td class="py-3 px-2 text-stone-600">Freeze and snip screen</td><td class="py-3 px-2 text-right"><span class="key-tag">SUPER</span> + <span class="key-tag">Ctrl</span> + <span class="key-tag">P</span></td></tr>
+                            <tr><td class="py-3 px-2 text-stone-600">Screenshot monitor</td><td class="py-3 px-2 text-right"><span class="key-tag">SUPER</span> + <span class="key-tag">Alt</span> + <span class="key-tag">P</span></td></tr>
+                            <tr><td class="py-3 px-2 text-stone-600">Screenshot all monitors</td><td class="py-3 px-2 text-right"><span class="key-tag">Print</span></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Theming -->
+                <div id="theming" class="tab-content">
+                    <p class="mb-6 text-stone-600">Customize the look and feel of your desktop environment on the fly. Change wallpapers, themes, and visual effects with these shortcuts.</p>
+                     <table class="w-full keybinding-table">
+                        <tbody class="divide-y divide-stone-200">
+                            <tr><td class="py-3 px-2 text-stone-600">Next global wallpaper</td><td class="py-3 px-2 text-right"><span class="key-tag">SUPER</span> + <span class="key-tag">Alt</span> + <span class="key-tag">→</span></td></tr>
+                            <tr><td class="py-3 px-2 text-stone-600">Previous global wallpaper</td><td class="py-3 px-2 text-right"><span class="key-tag">SUPER</span> + <span class="key-tag">Alt</span> + <span class="key-tag">←</span></td></tr>
+                            <tr><td class="py-3 px-2 text-stone-600">Select global wallpaper</td><td class="py-3 px-2 text-right"><span class="key-tag">SUPER</span> + <span class="key-tag">Shift</span> + <span class="key-tag">W</span></td></tr>
+                            <tr><td class="py-3 px-2 text-stone-600">Next Waybar layout</td><td class="py-3 px-2 text-right"><span class="key-tag">SUPER</span> + <span class="key-tag">Alt</span> + <span class="key-tag">↑</span></td></tr>
+                            <tr><td class="py-3 px-2 text-stone-600">Previous Waybar layout</td><td class="py-3 px-2 text-right"><span class="key-tag">SUPER</span> + <span class="key-tag">Alt</span> + <span class="key-tag">↓</span></td></tr>
+                            <tr><td class="py-3 px-2 text-stone-600">Wallbash mode selector</td><td class="py-3 px-2 text-right"><span class="key-tag">SUPER</span> + <span class="key-tag">Shift</span> + <span class="key-tag">R</span></td></tr>
+                            <tr><td class="py-3 px-2 text-stone-600">Select a theme</td><td class="py-3 px-2 text-right"><span class="key-tag">SUPER</span> + <span class="key-tag">Shift</span> + <span class="key-tag">T</span></td></tr>
+                            <tr><td class="py-3 px-2 text-stone-600">Select animations</td><td class="py-3 px-2 text-right"><span class="key-tag">SUPER</span> + <span class="key-tag">Shift</span> + <span class="key-tag">Y</span></td></tr>
+                            <tr><td class="py-3 px-2 text-stone-600">Select Hyprlock layout</td><td class="py-3 px-2 text-right"><span class="key-tag">SUPER</span> + <span class="key-tag">Shift</span> + <span class="key-tag">U</span></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Workspaces -->
+                <div id="workspaces" class="tab-content">
+                    <p class="mb-6 text-stone-600">Manage your virtual desktops, also known as workspaces. Use these commands to navigate between workspaces and move your application windows across them for a clean, organized workflow.</p>
+                    <table class="w-full keybinding-table">
+                        <tbody class="divide-y divide-stone-200">
+                             <tr><td colspan="2" class="pt-4 pb-2 text-lg font-bold text-teal-700">Navigation</td></tr>
+                            <tr><td class="py-3 px-2 text-stone-600">Navigate to workspace [1-10]</td><td class="py-3 px-2 text-right"><span class="key-tag">SUPER</span> + <span class="key-tag">1-9, 0</span></td></tr>
+                            <tr><td class="py-3 px-2 text-stone-600">Next/Previous workspace</td><td class="py-3 px-2 text-right"><span class="key-tag">SUPER</span> + <span class="key-tag">Ctrl</span> + <span class="key-tag">←</span>/<span class="key-tag">→</span></td></tr>
+                            <tr><td class="py-3 px-2 text-stone-600">Navigate to empty workspace</td><td class="py-3 px-2 text-right"><span class="key-tag">SUPER</span> + <span class="key-tag">Ctrl</span> + <span class="key-tag">↓</span></td></tr>
+                            <tr><td class="py-3 px-2 text-stone-600">Cycle with mouse scroll</td><td class="py-3 px-2 text-right"><span class="key-tag">SUPER</span> + <span class="key-tag">Mouse Scroll</span></td></tr>
+
+                            <tr><td colspan="2" class="pt-8 pb-2 text-lg font-bold text-teal-700">Move Window</td></tr>
+                            <tr><td class="py-3 px-2 text-stone-600">Move to workspace [1-10]</td><td class="py-3 px-2 text-right"><span class="key-tag">SUPER</span> + <span class="key-tag">Shift</span> + <span class="key-tag">1-9, 0</span></td></tr>
+                            <tr><td class="py-3 px-2 text-stone-600">Move to next/prev workspace</td><td class="py-3 px-2 text-right"><span class="key-tag">SUPER</span> + <span class="key-tag">Ctrl</span> + <span class="key-tag">Alt</span> + <span class="key-tag">←</span>/<span class="key-tag">→</span></td></tr>
+                            <tr><td class="py-3 px-2 text-stone-600">Move to workspace silently</td><td class="py-3 px-2 text-right"><span class="key-tag">SUPER</span> + <span class="key-tag">Alt</span> + <span class="key-tag">1-9, 0</span></td></tr>
+
+                            <tr><td colspan="2" class="pt-8 pb-2 text-lg font-bold text-teal-700">Special Workspace (Scratchpad)</td></tr>
+                            <tr><td class="py-3 px-2 text-stone-600">Toggle scratchpad</td><td class="py-3 px-2 text-right"><span class="key-tag">SUPER</span> + <span class="key-tag">S</span></td></tr>
+                            <tr><td class="py-3 px-2 text-stone-600">Move to scratchpad</td><td class="py-3 px-2 text-right"><span class="key-tag">SUPER</span> + <span class="key-tag">Shift</span> + <span class="key-tag">S</span></td></tr>
+                            <tr><td class="py-3 px-2 text-stone-600">Move to scratchpad (silent)</td><td class="py-3 px-2 text-right"><span class="key-tag">SUPER</span> + <span class="key-tag">Alt</span> + <span class="key-tag">S</span></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <footer class="text-center mt-8 text-stone-500 text-sm">
+            <p>Generated from your Hyprland configuration.</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const tabs = document.querySelectorAll('.tab-button');
+            const tabContents = document.querySelectorAll('.tab-content');
+            const searchInput = document.getElementById('searchInput');
+            const tables = document.querySelectorAll('.keybinding-table');
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(item => {
+                        item.classList.remove('active', 'border-teal-500', 'text-teal-600');
+                        item.classList.add('border-transparent', 'text-stone-500');
+                    });
+                    tab.classList.add('active', 'border-teal-500', 'text-teal-600');
+                    tab.classList.remove('border-transparent', 'text-stone-500');
+
+                    const target = tab.getAttribute('data-tab');
+                    tabContents.forEach(content => {
+                        content.classList.remove('active');
+                        if (content.id === target) {
+                            content.classList.add('active');
+                        }
+                    });
+                });
+            });
+
+            searchInput.addEventListener('input', function () {
+                const filter = searchInput.value.toLowerCase();
+                
+                tables.forEach(table => {
+                    const rows = table.getElementsByTagName('tr');
+                    for (let i = 0; i < rows.length; i++) {
+                        const row = rows[i];
+                        const descriptionCell = row.cells[0];
+                        const keyCell = row.cells[1];
+                        
+                        if (descriptionCell) {
+                             const descriptionText = descriptionCell.textContent || descriptionCell.innerText;
+                             const keyText = keyCell ? (keyCell.textContent || keyCell.innerText) : '';
+                             
+                             if (descriptionText.toLowerCase().indexOf(filter) > -1 || keyText.toLowerCase().indexOf(filter) > -1) {
+                                row.style.display = "";
+                             } else {
+                                row.style.display = "none";
+                             }
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+
